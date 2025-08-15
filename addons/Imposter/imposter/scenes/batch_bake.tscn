@@ -163,14 +163,14 @@ render_target_update_mode = 4
 title = "Open a Directory"
 initial_position = 4
 size = Vector2i(800, 600)
-ok_button_text = "选择当前文件夹"
+ok_button_text = "Select Current Folder"
 file_mode = 2
 
 [node name="SaveFileDialog" type="FileDialog" parent="."]
 title = "Open a Directory"
 initial_position = 4
 size = Vector2i(800, 600)
-ok_button_text = "选择当前文件夹"
+ok_button_text = "Select Current Folder"
 file_mode = 2
 
 [node name="AcceptDialog" type="AcceptDialog" parent="."]

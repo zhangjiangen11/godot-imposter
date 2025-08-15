@@ -181,7 +181,6 @@ func init_bake_scene():
 func prepare_scene():
 	view_port.size=Vector2i(resolution,resolution)
 
-	
 	init_bake_scene()
 	
 	for x in frame_size:
@@ -260,7 +259,7 @@ func export_texture(maper:MapBaker,image:Image,prefix:String):
 		dialog.dialog_text='Check your directory and file name'
 		dialog.popup_centered()
 		return
-
+			
 	var filename ="%s/%s_%s_%s.png"%[save_dir,prefix,base_filename,maper.get_name()]
 	
 	if FileAccess.file_exists(filename):
@@ -324,12 +323,14 @@ func export_scene(mat: ShaderMaterial, texture_array: bool = false, shadow_mat: 
 	mi.name = "mesh-impostor"
 	mi.mesh = quad_mesh
 	mi.mesh.surface_set_material(0, mat)
+	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	if shadow_mat != null:
 		root.add_child(mi_shadow)
 		mi_shadow.owner = root
 		mi_shadow.mesh = quad_mesh.duplicate()
 		mi_shadow.name = "shadow-impostor"
 		mi_shadow.mesh.surface_set_material(0, shadow_mat)
+		mi_shadow.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 
 	var packed_scene: PackedScene = PackedScene.new()
 	

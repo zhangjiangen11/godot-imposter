@@ -1,5 +1,6 @@
 @tool
-extends Control
+extends PanelContainer
+class_name SingleBake
 
 @onready var file_dialog = $FileDialog
 @onready var warin_dialog = $AcceptDialog
@@ -28,7 +29,6 @@ var temp_bar:int
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
 #region godot 4.2+ ,variables can be deleted
 	plugin = EditorPlugin.new()
 	interface = plugin.get_editor_interface()
@@ -67,6 +67,12 @@ func change_bar_value(bar:int):
 	progressbar.value=temp_bar
 	await progressbar.changed
 
+func set_actor(sel:Node3D):
+	photo_sdudio.set_scene(sel)
+	filename.text = sel.name
+	photo_sdudio.base_filename=sel.name
+	progressbar.value=0
+	
 
 func _on_generate_pressed():
 	temp_bar=0
@@ -74,30 +80,6 @@ func _on_generate_pressed():
 	progressbar.max_value=max_bar
 	progressbar.value=temp_bar
 	photo_sdudio.bake()
-
-
-func _on_process_pressed():
-
-#region godot 4.2+ use the following line of code
-	var sels = interface.get_selection().get_selected_nodes()
-	#var sels = EditorInterface.get_selection().get_selected_nodes()
-#endregion
-
-	if sels.size()!=1:
-		warin_dialog.dialog_text = 'select one node'
-		warin_dialog.popup_centered()
-		return
-	
-	var sel = sels[0]
-	if not sel is Node3D:
-		warin_dialog.dialog_text = 'select 3d node'
-		warin_dialog.popup_centered()
-		return
-	
-	photo_sdudio.set_scene(sel)
-	filename.text = sel.name
-	photo_sdudio.base_filename=sel.name
-		
 	
 
 func _on_save_but_pressed():
@@ -117,14 +99,10 @@ func _on_shadow_but_toggled(button_pressed):
 
 
 
-
-
 func _on_file_dialog_dir_selected(dir):
 	photo_sdudio.save_dir=dir
 	save_path=dir
 	save_path_edit.text = dir
-
-
 
 
 func _on_line_edit_text_submitted(new_text):
