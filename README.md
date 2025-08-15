@@ -1,30 +1,62 @@
-# godot-imposter
-imposter plugin for godot 4.x
+# Godot Imposter
+Imposter plugin for Godot 4.x
 
-Simple implementation of octahedral impostors in Godot. 
+Simple implementation of octahedral impostors in Godot.
 
-
+## About
 This project was inspired by: https://github.com/wojtekpil/Godot-Octahedral-Impostors
 
+Unfortunately, the project has not been adapted for Godot 4. Godot 4.x introduces significant architectural changes compared to 3.x, rendering the original project incompatible.
 
-Unfortunately, the author's last update was 2 years ago, and this project has not been adapted for the godot4 version. The godot4.x version has significant changes compared to the godot3.x version, making it incompatible with this project.
-Therefore, based on this project and taking into account the features of the godot4.x version and my personal understanding of imposters, I have implemented a version suitable for godot4.1.2.
+Based on the original work, and considering Godot 4.x's features along with my understanding of impostor techniques, I have developed a version compatible with Godot 4.x.
 
-I would like to thank the original author for their work. I reused the shader code and made modifications specifically for the godot4.x version.
+Special thanks to the original author. I reused and adapted their shader code specifically for Godot 4.x.
 
+**Verified compatibility: Godot v4.5.beta5**
 
-# operating guide
-single:
-![image](https://github.com/zhangjt93/godot-imposter/blob/master/guide/741698737002_.pic.jpg)
-batch:
-![image](https://github.com/zhangjt93/godot-imposter/blob/master/guide/batch_20231105.jpg)
-It will recursively read through the resources in the files, only processing files whose filenames end with tscn.
+---
 
-If you encounter any issues during use, please feel free to contact me.
+## Major Updates
+1. **Disabled batch processing**
+2. **New editor integration** — The plugin is now accessible via the 3D editor viewport instead of a bottom panel.
 
-If you have any ideas or suggestions while using the project, I would also welcome your feedback and would be happy to communicate with you.
+---
 
-If this project has been helpful to your work and if you like it, I kindly ask you to give it a star.
-Your support is my greatest motivation.
+## Usage
+When selecting a node (or its child nodes) inherited from `GeometryInstance3D` in the Scene Tree, an **Imposter** button will appear in the 3D editor toolbar, adjacent to *Transform* and *View* controls.
 
-Thank you!
+![image](https://github.com/zhangjt93/godot-imposter/blob/master/guide/20250815185643_157.png)
+
+### Steps:
+1. Select a node containing `GeometryInstance3D` elements in the Scene Tree
+2. Locate the **Imposter** button in the 3D editor toolbar
+3. **Click to open the configuration window**
+
+---
+
+## Important Notes
+⚠️ **Transform Warning**:
+If baking a node with world-space transformations (e.g., scaled/rotated objects), the **node's transform** will be reset during baking.
+
+**Workaround**:
+Place transformed nodes under a `Node3D` parent, then:
+1. Reset the **parent node's transform** to zero
+2. Bake the parent node while preserving children transforms
+
+---
+
+## Roadmap
+Researching texture compression methods to optimize memory usage and performance while preserving visual fidelity. Priority for next updates.
+
+---
+
+## Support
+- 🐞 **Issues?** Open a GitHub ticket or contact me directly
+- 💡 **Suggestions?** Feedback and ideas are welcome!
+- ⭐ **Enjoy this tool?** Star the repo to support development!
+
+---
+
+## License
+MIT License. See [LICENSE](LICENSE) for details.
+
